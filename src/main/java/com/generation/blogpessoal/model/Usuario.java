@@ -18,7 +18,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "tb_usuario")
+@Table(name = "tb_usuarioS")
 public class Usuario {
 
     @Id
@@ -42,4 +42,52 @@ public class Usuario {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"usuario"})
     private List<Postagens> postagem;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public List<Postagens> getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(List<Postagens> postagem) {
+		this.postagem = postagem;
+	}
 }

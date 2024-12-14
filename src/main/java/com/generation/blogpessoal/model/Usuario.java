@@ -18,7 +18,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "tb_usuarioS")
+@Table(name = "tb_usuarios")
 public class Usuario {
 
     @Id
@@ -42,6 +42,17 @@ public class Usuario {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"usuario"})
     private List<Postagens> postagem;
+    
+    public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+	}
+
+	public Usuario() {}
+
 
 	public long getId() {
 		return id;

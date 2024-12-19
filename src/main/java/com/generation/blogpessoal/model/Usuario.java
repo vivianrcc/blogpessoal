@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,13 +22,14 @@ import jakarta.validation.constraints.Size;
 @Table(name = "tb_usuarios")
 public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    @NotNull(message = "O  Nome é Obrigatório!")
+	@NotNull(message = "O  Nome é Obrigatório!")
 	private String nome;
 
+	@Schema(example = "email@email.com.br")
 	@NotNull(message = "O  Usuário é Obrigatório!")
 	@Email(message = "O email válido!")
 	private String usuario;
@@ -39,11 +41,11 @@ public class Usuario {
 	@Size(max = 5000, message = "Limite de 5000 caracteres")
 	private String foto;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"usuario"})
-    private List<Postagens> postagem;
-    
-    public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({ "usuario" })
+	private List<Postagens> postagem;
+
+	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
 		this.id = id;
 		this.nome = nome;
 		this.usuario = usuario;
@@ -51,8 +53,8 @@ public class Usuario {
 		this.foto = foto;
 	}
 
-	public Usuario() {}
-
+	public Usuario() {
+	}
 
 	public long getId() {
 		return id;

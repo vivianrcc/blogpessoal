@@ -17,38 +17,38 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "tb_temas")
 public class Tema {
-	
-	@Id 
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull (message = "O atributo Descrição é obligatorio")
+
+	@NotNull(message = "O atributo Descrição é obligatorio")
 	private String descricao;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tema", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("tema")
 	private List<Postagens> postagem;
-	
+
 	public Long getId() {
 		return id;
 	}
- 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
- 
+
 	public String getDescricao() {
 		return descricao;
 	}
- 
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
- 
+
 	public List<Postagens> getPostagem() {
 		return postagem;
 	}
- 
+
 	public void setPostagem(List<Postagens> postagem) {
 		this.postagem = postagem;
 	}

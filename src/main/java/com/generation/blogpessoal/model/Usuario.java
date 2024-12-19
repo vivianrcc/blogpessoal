@@ -35,7 +35,7 @@ public class Usuario {
 	private String usuario;
 
 	@NotBlank(message = "A Senha é Obrigatório!")
-	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
+	@Size(min = 6, message = "A Senha deve ter no mínimo 6 caracteres")
 	private String senha;
 
 	@Size(max = 5000, message = "Limite de 5000 caracteres")
@@ -56,6 +56,7 @@ public class Usuario {
 	public Usuario() {
 	}
 
+	//GETTERS AND SETTERS
 	public long getId() {
 		return id;
 	}

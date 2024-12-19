@@ -28,48 +28,47 @@ import jakarta.validation.Valid;
 @RequestMapping("/temas")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TemaController {
-	
+
 	@Autowired
 	private TemaRepository temaRepository;
-	
+
 	@GetMapping
 	public ResponseEntity<List<Tema>> getAll() {
-        return ResponseEntity.ok(temaRepository.findAll());
-    }
+		return ResponseEntity.ok(temaRepository.findAll());
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Tema> getById(@RequestParam long id) {
-        return temaRepository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<Tema> getById(@RequestParam long id) {
+		return temaRepository.findById(id).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.notFound().build());
+	}
 
-    @GetMapping("/descricao/{descricao}")
-    public ResponseEntity<List<Tema>> getByDescricao(@RequestParam String descricao) {
-        return ResponseEntity.ok(temaRepository.findAllByDescricaoContainingIgnoreCase(descricao));
-    }
+	@GetMapping("/descricao/{descricao}")
+	public ResponseEntity<List<Tema>> getByDescricao(@RequestParam String descricao) {
+		return ResponseEntity.ok(temaRepository.findAllByDescricaoContainingIgnoreCase(descricao));
+	}
 
-    @PostMapping
-    public ResponseEntity<Tema> post(@RequestBody Tema tema) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-        .body(temaRepository.save(tema));
-    }
+	@PostMapping
+	public ResponseEntity<Tema> post(@RequestBody Tema tema) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(temaRepository.save(tema));
+	}
 
-    @PutMapping
-    public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema) {
-        return temaRepository.findById(tema.getId())
-        .map(resp -> ResponseEntity.status(HttpStatus.CREATED)
-        .body(temaRepository.save(tema)))
-        .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    }
+	@PutMapping
+	public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema) {
+		return temaRepository.findById(tema.getId())
+				.map(resp -> ResponseEntity.status(HttpStatus.CREATED).body(temaRepository.save(tema)))
+				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+	}
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
-        Optional<Tema> tema = temaRepository.findById(id);
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable long id) {
+		Optional<Tema> tema = temaRepository.findById(id);
 
-        if(tema.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+		if (tema.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
 
-        temaRepository.deleteById(id);
-    }    
+		temaRepository.deleteById(id);
+	}
 }

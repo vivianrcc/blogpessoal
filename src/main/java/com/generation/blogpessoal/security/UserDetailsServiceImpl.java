@@ -16,17 +16,17 @@ import com.generation.blogpessoal.repository.UsuarioRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UsuarioRepository userRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-       Optional<Usuario> user = userRepository.findByUsuario(userName);
+	@Override
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		Optional<Usuario> user = usuarioRepository.findByUsuario(userName);
 
-       if(user.isPresent()) {
-           return new UserDetailsImpl(user.get());
-       } else {
-           throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-       }
-    }
+		if (user.isPresent()) {
+			return new UserDetailsImpl(user.get());
+		} else {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+		}
+	}
 }

@@ -38,7 +38,7 @@ public class TemaController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Tema> getById(@RequestParam long id) {
+	public ResponseEntity<Tema> getById(@PathVariable Long id) {
 		return temaRepository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
